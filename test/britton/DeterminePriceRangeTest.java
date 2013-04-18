@@ -75,4 +75,5 @@ public class DeterminePriceRangeTest {
 		assertEquals("C", result.get(2).getCompanyName());	
 	}
 
+
 }

@@ -7,37 +7,52 @@ import britton.beans.Company;
 import britton.beans.Customer;
 
 public class DeterminePriceRange {
+	
+	List<Company> companyList;
+	
+	public DeterminePriceRange(){
+	}
 
-	public List<Company> findCompaniesWithinPriceRange(Customer cu) {
+	/* This function does the work to find out whether a company is a match for a 
+	 * customer that is passed in OR that a customer is a match for a company.
+	 * I made the conscious decision to pull out the cuLow, cuHigh,
+	 * coLow, and coHigh to make the doesCustomerFallInCompanyRange and doesCompanyFallInCustomerRange
+	 * methods more readable.  
+	*/
+	public List<Company> findCompaniesWithinPriceRange(Customer cus) {
+		//This will be the return value populated with the list of companies available for shopping within the budget
 		List<Company> placesToShop = new ArrayList<>();
-		int coLow, coHigh;
 		
-		List<Company> companyList = new ArrayList<>();
-		companyList.add(new Company("A", 1000, 3000));
-		companyList.add(new Company("B", 6000, 10000));
-		companyList.add(new Company("C", 500, 2500));
+		//This returns the list of companies available for shopping
+		List<Company> companyList = GatherCompanies.getInstance();
 		
-		int cuHigh = cu.getHighRange();
-		int cuLow = cu.getLowRange();
+		//Will need to find these in each company
+		int comLow, comHigh;
 		
-		for(Company co : companyList){
-			coLow = co.getLowPrice();
-			coHigh = co.getHighPrice();
+		//Only need to get the customer's info one time
+		int cusHigh = cus.getHighRange();
+		int cusLow = cus.getLowRange();
+		
+		for(Company com : companyList){
+			//Need to find these per company
+			comLow = com.getLowPrice();
+			comHigh = com.getHighPrice();
 			
-			if(doesCustomerFallInCompanyRange(cuLow, cuHigh, coLow, coHigh) || doesCompanyFallInCustomerRange(cuLow, cuHigh, coLow, coHigh)){
-				  placesToShop.add(co);
+			//Check to see if customer fits the company or if company fits the customer
+			if(doesCustomerFallInCompanyRange(cusLow, cusHigh, comLow, comHigh) || doesCompanyFallInCustomerRange(cusLow, cusHigh, comLow, comHigh)){
+				  placesToShop.add(com);
 			}	
 		}
 		return placesToShop;
 	}
 		//This method serves to return whether a customer falls into a company's price range
-		private boolean doesCustomerFallInCompanyRange(int cuLow, int cuHigh, int coLow, int coHigh) {
-			return cuLow >= coLow && cuLow <= coHigh || cuHigh >= coLow && cuHigh <= coHigh;
+		private boolean doesCustomerFallInCompanyRange(int cusLow, int cusHigh, int comLow, int comHigh) {
+			return cusLow >= comLow && cusLow <= comHigh || cusHigh >= comLow && cusHigh <= comHigh;
 		}
 		
 		//This method serves to return whether a company falls within a customer's price range
-		private boolean doesCompanyFallInCustomerRange(int cuLow, int cuHigh, int coLow, int coHigh){
-			return coLow >= cuLow && coLow <= cuHigh || coHigh >= cuHigh && coHigh <= cuHigh;
+		private boolean doesCompanyFallInCustomerRange(int cusLow, int cusHigh, int comLow, int comHigh){
+			return comLow >= cusLow && comLow <= cusHigh || comHigh >= cusHigh && comHigh <= cusHigh;
 		}
 		
 
