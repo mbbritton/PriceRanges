@@ -19,12 +19,12 @@ public class GatherCompanies {
 	}
 	
 	private static List<Company> populateCompanies(){
-		 companyListINSTANCE = new ArrayList<Company>();
+		companyListINSTANCE = new ArrayList<Company>();
 		 
 		//Create companies and add to list
-	    companyListINSTANCE.add(createCompany("A", 1000, 3000));
-	    companyListINSTANCE.add(createCompany("B", 6000, 10000));
-	    companyListINSTANCE.add(createCompany("C", 500, 2500));
+		companyListINSTANCE.add(createCompany("A", 1000, 3000));
+		companyListINSTANCE.add(createCompany("B", 6000, 10000));
+		companyListINSTANCE.add(createCompany("C", 500, 2500));
 		
 		return companyListINSTANCE;
 	}
