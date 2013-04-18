@@ -10,7 +10,7 @@ public class GatherCompanies {
 	private static List<Company> companyListINSTANCE;
 	
 	//Only want to build/initialize this list once then reuse it in the future (singleton)
-	public synchronized static List<Company> getInstance(){
+	public static List<Company> getInstance(){
 		//Check if it is null or empty, if so we need to build it for the first time
 		if(null == companyListINSTANCE || companyListINSTANCE.size() == 0){
 			companyListINSTANCE = populateCompanies();

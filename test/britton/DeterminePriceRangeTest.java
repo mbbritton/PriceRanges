@@ -117,6 +117,30 @@ public class DeterminePriceRangeTest {
 	}
 	
 	@Test
+	public void testfindCompanies_with_identical_values_that_are_zero() {
+		//Assemble
+		Customer customer = new Customer(0, 0);
+		
+		//Act
+		List<Company> result = testObject.findCompaniesWithinPriceRange(customer);
+		
+		//Assert
+		assertEquals(0, result.size());
+	}
+	
+	@Test
+	public void testfindCompanies_with_identical_values_that_are_max() {
+		//Assemble
+		Customer customer = new Customer(Integer.MAX_VALUE, Integer.MAX_VALUE);
+		
+		//Act
+		List<Company> result = testObject.findCompaniesWithinPriceRange(customer);
+		
+		//Assert
+		assertEquals(0, result.size());
+	}
+	
+	@Test
 	public void testfindCompanies_testing_min_and_max() {
 		//Assemble
 		Customer customer = new Customer(0, Integer.MAX_VALUE);

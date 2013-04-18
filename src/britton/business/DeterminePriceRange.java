@@ -7,11 +7,6 @@ import britton.beans.Company;
 import britton.beans.Customer;
 
 public class DeterminePriceRange {
-	
-	List<Company> companyList;
-	
-	public DeterminePriceRange(){
-	}
 
 	/* This function does the work to find out whether a company is a match for a 
 	 * customer that is passed in OR that a customer is a match for a company.
