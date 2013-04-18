@@ -74,6 +74,93 @@ public class DeterminePriceRangeTest {
 		assertEquals("B", result.get(1).getCompanyName());
 		assertEquals("C", result.get(2).getCompanyName());	
 	}
+	
+	@Test
+	public void testfindCompanies_with_values_passed_in_backwards() {
+		//Assemble
+		//Customer swapped their low-high for high-low, that's ok, we'll still help them!
+		Customer customer = new Customer(1500, 700);
+		
+		//Act
+		List<Company> result = testObject.findCompaniesWithinPriceRange(customer);
+		
+		//Assert
+		assertEquals(2, result.size());
+		assertEquals("A", result.get(0).getCompanyName());
+		assertEquals("C", result.get(1).getCompanyName());
+	}
+	
+	@Test
+	public void testfindCompanies_with_identical_values_no_company_matches() {
+		//Assemble
+		Customer customer = new Customer(5000, 5000);
+		
+		//Act
+		List<Company> result = testObject.findCompaniesWithinPriceRange(customer);
+		
+		//Assert
+		assertEquals(0, result.size());
+	}
+	
+	@Test
+	public void testfindCompanies_with_identical_values_with_company_matches() {
+		//Assemble
+		Customer customer = new Customer(6000, 6000);
+		
+		//Act
+		List<Company> result = testObject.findCompaniesWithinPriceRange(customer);
+		
+		//Assert
+		assertEquals(1, result.size());
+		assertEquals("B", result.get(0).getCompanyName());
+
+	}
+	
+	@Test
+	public void testfindCompanies_testing_min_and_max() {
+		//Assemble
+		Customer customer = new Customer(0, Integer.MAX_VALUE);
+		
+		//Act
+		List<Company> result = testObject.findCompaniesWithinPriceRange(customer);
+		
+		//Assert
+		assertEquals(3, result.size());
+		assertEquals("A", result.get(0).getCompanyName());
+		assertEquals("B", result.get(1).getCompanyName());
+		assertEquals("C", result.get(2).getCompanyName());
+	}
+	
+	@Test
+	public void testfindCompanies_with_no_customer_range_defined_defualts_to_be_used() {
+		//Assemble
+		Customer customer = new Customer();
+		
+		//Act
+		List<Company> result = testObject.findCompaniesWithinPriceRange(customer);
+		
+		//Assert
+		assertEquals(3, result.size());
+		assertEquals("A", result.get(0).getCompanyName());
+		assertEquals("B", result.get(1).getCompanyName());
+		assertEquals("C", result.get(2).getCompanyName());
+	}
+	
+	@Test
+	public void testfindCompanies_with_one_value_given() {
+		//Assemble
+		Customer customer = new Customer(1500);
+		
+		//Act
+		List<Company> result = testObject.findCompaniesWithinPriceRange(customer);
+		
+		//Assert
+		assertEquals(2, result.size());
+		assertEquals("A", result.get(0).getCompanyName());
+		assertEquals("C", result.get(1).getCompanyName());
+	}
+	
+	
 
 
 }

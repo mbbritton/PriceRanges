@@ -10,6 +10,14 @@ public class Customer {
 		this.highRange = value1;
 	}
 	
+	public Customer(int value0) {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Customer() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getLowRange() {
 		return lowRange;
 	}
