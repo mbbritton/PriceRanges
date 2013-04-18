@@ -33,7 +33,7 @@ public class Customer {
 	public void setLowRange(int lowRange) {
 		this.lowRange = lowRange;
 	}
-
+	
 	public int getHighRange() {
 		return highRange;
 	}
